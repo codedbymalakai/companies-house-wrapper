@@ -1,9 +1,10 @@
-import { searchCompanies } from "./companiesHouseService";
-const express = require("express");
+import express from "express";
+import { searchCompanies } from "../services/companiesHouseService.js";
 
-const app = express();
-app.use(express.json());
+const router = express.Router();
 
-app.get("/company/:companyNumber", (req, res) => {
+router.get("/company/:companyNumber", (req, res) => {
   // Call function from services
 });
+
+export default router;
