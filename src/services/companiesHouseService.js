@@ -1,7 +1,9 @@
-const axios = require("axios");
+import axios from "axios";
+import dotenv from "dotenv";
+dotenv.config();
 const BASEURL = "https://api.company-information.service.gov.uk/";
 const config = {
-  auth: { username: COMPANIES_HOUSE_API_KEY, password: "" },
+  auth: { username: process.env.COMPANIES_HOUSE_API_KEY, password: "" },
 };
 
 export function getCompanyDetails() {}
