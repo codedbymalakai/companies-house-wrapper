@@ -2,6 +2,7 @@ import express from "express";
 import {
   searchCompanies,
   getCompanyDetails,
+  compareCompanies,
 } from "../services/companiesHouseService.js";
 
 const router = express.Router();
@@ -50,6 +51,22 @@ router.get("/companies/search/:postcode", async (req, res) => {
   }
 });
 
-router.post();
+router.post("/companies/compare", async (req, res) => {
+  const { postcode, allowedCompanies } = req.body;
+
+  try {
+    const result = await compareCompanies(postcode, allowedCompanies);
+
+    return res.status(200).json({
+      ok: true,
+      data: result,
+    });
+  } catch (error) {
+    return res.status(error?.statusCode || 500).json({
+      ok: false,
+      error: error.message || "Failed to compare companies",
+    });
+  }
+});
 
 export default router;
