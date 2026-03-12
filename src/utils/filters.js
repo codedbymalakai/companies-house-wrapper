@@ -1,3 +1,11 @@
+function toTitleCase(str) {
+  return str
+    .toLowerCase()
+    .split(" ")
+    .map((word) => word.slice(0, 1).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
 export function filterSearch(data) {
   if (!Array.isArray(data)) {
     return [];
