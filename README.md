@@ -133,15 +133,17 @@ Example Response
 ```JSON
 [
   {
-    "companyNumber": "16804200",
-    "companyName": "AAA MOVEMENTS LTD",
-    "status": "active"
-  },
-  {
-    "companyNumber": "16409528",
-    "companyName": "AAA UTILITIES LIMITED",
-    "status": "active"
-  }
+      "companyName": "AA ACCOUNTANTS SOUTH LIMITED",
+      "companyNumber": "09341226",
+      "companyStatus": "Active",
+      "dateOfCreation": "2014-12-04"
+    },
+    {
+      "companyName": "A & A OULTRAM LIMITED",
+      "companyNumber": "04056359",
+      "companyStatus": "Active",
+      "dateOfCreation": "2000-08-21"
+    }
 ]
 ```
 
