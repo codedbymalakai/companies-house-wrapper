@@ -1,5 +1,6 @@
 import axios from "axios";
 import dotenv from "dotenv";
+import { filterSearch, cleanSearch } from "../utils/filters.js";
 
 dotenv.config();
 
@@ -8,7 +9,9 @@ const config = {
   auth: { username: process.env.COMPANIES_HOUSE_API_KEY, password: "" },
 };
 
-export async function getCompanyDetails() {}
+export async function getCompanyDetails(companyNumber) {
+  return companyNumber;
+}
 
 export async function searchCompanies(postcode) {
   if (!postcode) {
@@ -20,7 +23,11 @@ export async function searchCompanies(postcode) {
   try {
     const response = await axios.get(url, config);
 
-    return response.data?.items || [];
+    const filteredResponse = filterSearch(response?.data?.items || []);
+
+    const cleanResponse = cleanSearch(filteredResponse || []);
+
+    return cleanResponse || [];
   } catch (error) {
     const newError = new Error(
       error?.response?.data?.error ||
