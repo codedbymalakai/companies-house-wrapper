@@ -23,9 +23,34 @@ export function cleanSearch(data) {
   const cleanData = data.map((company) => ({
     companyName: company?.title,
     companyNumber: company?.company_number,
-    companyStatus: company?.company_status,
+    companyStatus: toTitleCase(company?.company_status),
     addressSnippet: company?.addressSnippet,
     dateOfCreation: company?.date_of_creation,
   }));
   return cleanData;
+}
+
+export function transformDict(dict) {
+  if (typeof dict !== "object" || Array.isArray(dict)) {
+    return {};
+  }
+  const {
+    company_name,
+    company_number,
+    company_status,
+    date_of_creation,
+    type,
+    sic_codes,
+    registered_office_address,
+  } = dict;
+
+  return {
+    companyName: company_name,
+    companyyNumber: company_number,
+    companyStatus: company_status,
+    dateOfCreation: date_of_creation,
+    companyType: type,
+    sicCodes: sic_codes,
+    registeredOfficeAddress: registered_office_address,
+  };
 }
