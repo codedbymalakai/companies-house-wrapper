@@ -1,6 +1,6 @@
 import axios from "axios";
 import dotenv from "dotenv";
-import { filterSearch, cleanSearch } from "../utils/filters.js";
+import { filterSearch, cleanSearch, transformDict } from "../utils/filters.js";
 
 dotenv.config();
 
@@ -10,7 +10,27 @@ const config = {
 };
 
 export async function getCompanyDetails(companyNumber) {
-  return companyNumber;
+  if (!companyNumber) {
+    const error = new Error("Company number is required for searching.");
+    error.statusCode = 400;
+    throw error;
+  }
+  const url = `${BASEURL}company/${companyNumber}`;
+  try {
+    const response = await axios.get(url, config);
+
+    const transformedDict = transformDict(response?.data);
+
+    return transformedDict;
+  } catch (error) {
+    const newError = new Error(
+      error?.response?.data?.error ||
+        error.message ||
+        "Failed to get company details.",
+    );
+    newError.statusCode = error?.response?.status || 500;
+    throw newError;
+  }
 }
 
 export async function searchCompanies(postcode) {
