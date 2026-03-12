@@ -1,6 +1,6 @@
 export function filterSearch(data) {
-  if (!data) {
-    console.log("ERROR");
+  if (!Array.isArray(data)) {
+    return [];
   }
   const filteredArray = data.filter(
     (company) => company.company_status !== "dissolved",
@@ -9,8 +9,8 @@ export function filterSearch(data) {
 }
 
 export function cleanSearch(data) {
-  if (!data) {
-    console.log("ERROR");
+  if (!Array.isArray(data)) {
+    return [];
   }
   const cleanData = data.map((company) => ({
     companyName: company?.title,

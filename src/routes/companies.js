@@ -50,4 +50,6 @@ router.get("/companies/search/:postcode", async (req, res) => {
   }
 });
 
+router.post();
+
 export default router;
