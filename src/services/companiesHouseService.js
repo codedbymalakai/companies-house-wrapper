@@ -1,29 +1,33 @@
 import axios from "axios";
 import dotenv from "dotenv";
+
 dotenv.config();
+
 const BASEURL = "https://api.company-information.service.gov.uk/";
 const config = {
   auth: { username: process.env.COMPANIES_HOUSE_API_KEY, password: "" },
 };
 
-export function getCompanyDetails() {}
+export async function getCompanyDetails() {}
 
 export async function searchCompanies(postcode) {
   if (!postcode) {
-    return {
-      statusCode: 400,
-      body: { ok: false, error: "Postcode is required for searching." },
-    };
+    const error = new Error("Postcode is required for searching.");
+    error.statusCode = 400;
+    throw error;
   }
-  const url = `${BASEURL}search/companies?q=${postcode}`;
+  const url = `${BASEURL}search/companies?q=${encodeURIComponent(postcode)}`;
   try {
-    const searchResponse = await axios.get(url, config);
+    const response = await axios.get(url, config);
 
-    console.log(searchResponse.data);
+    return response.data?.items || [];
   } catch (error) {
-    return {
-      statusCode: error?.response?.status || 500,
-      body: { ok: false, error: error.message || "Unknown Error" },
-    };
+    const newError = new Error(
+      error?.response?.data?.error ||
+        error.message ||
+        "Failed to search companies.",
+    );
+    newError.statusCode = error?.response?.status || 500;
+    throw newError;
   }
 }
