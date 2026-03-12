@@ -41,15 +41,15 @@ Install dependencies
 npm install
 ```
 
-Environment Variables
+## Environment Variables
 
 Create a .env file in the root of the project and add your Companies House API key:
-COMPANIES_HOUSE_API_KEY=your_api_key_here
+`COMPANIES_HOUSE_API_KEY=your_api_key_here`
 
 You can obtain an API key from:
 https://developer.company-information.service.gov.uk/
 
-Running the Server
+## Running the Server
 
 Start the development server:
 
@@ -63,14 +63,16 @@ The API will run on:
 http://localhost:3000
 ```
 
-Health check endpoint:
+## Health check endpoint:
 
 ```bash
 GET /health
 ```
 
-API Endpoints
+## API Endpoints
+
 `GET /health`
+
 Purpose
 
 Simple health check to verify the API is running.
@@ -84,12 +86,15 @@ Response
 ```
 
 GET `/company/:companyNumber`
+
 Purpose
 
 Retrieve detailed information about a specific company using its Companies House number.
 
 Example Request
+
 `GET /company/01624297`
+
 Example Response
 
 ```JSON
@@ -112,6 +117,7 @@ Error Response
 ```
 
 GET `/companies/search/:postcode`
+
 Purpose
 
 Search for companies registered at a given postcode.
@@ -119,7 +125,9 @@ Search for companies registered at a given postcode.
 The results are cleaned and dissolved companies are removed.
 
 Example Request
+
 `GET /companies/search/EC2A 4NE`
+
 Example Response
 
 ```JSON
@@ -138,6 +146,7 @@ Example Response
 ```
 
 POST `/companies/compare`
+
 Purpose
 
 Compares companies registered at a postcode against a list of allowed companies.
@@ -187,7 +196,7 @@ Error Response
 }
 ```
 
-Error Handling
+## Error Handling
 
 All endpoints return structured error responses when something goes wrong.
 
@@ -201,7 +210,7 @@ Companies House API errors
 
 Errors will return an appropriate HTTP status code and error message.
 
-Project Structure
+## Project Structure
 
 ```
 src
@@ -214,7 +223,7 @@ src
  └── server.js
 ```
 
-Routes
+## Routes
 
 Handle HTTP requests and responses.
 
@@ -226,7 +235,7 @@ Helpers
 
 Utility functions for filtering and transforming data.
 
-Future Improvements
+## Future Improvements
 
 Potential improvements include:
 
